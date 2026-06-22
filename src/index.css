@@ -1,0 +1,233 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #060614;
+  color: #f3efe8;
+  font-family: 'Manrope', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection { background: #c4a44a; color: #060614; }
+
+img { display: block; }
+
+input, textarea, button, select { font-family: inherit; }
+
+a { text-decoration: none; color: inherit; }
+
+/* Leaflet dark theme */
+.leaflet-container { font-family: 'Manrope', sans-serif; background: #060614; }
+.leaflet-popup-content-wrapper { background: #12122a; color: #f3efe8; border-radius: 3px; }
+.leaflet-popup-tip { background: #12122a; }
+.leaflet-bar a { background: #12122a; color: #f3efe8; border-color: rgba(255,255,255,.12); }
+.leaflet-attribution-flag { display: none !important; }
+.leaflet-control-attribution { display: none !important; }
+
+/* Keyframes */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes announceScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes heroLine {
+  from { opacity: 0; transform: translateY(110%); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroFade {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes drawerIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes cardReveal {
+  from { opacity: 0; transform: translateY(40px) scale(.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* CSS-driven word cycling for hero */
+@keyframes dn8word1 {
+  0%   { opacity:1; transform:translateY(0);  }
+  24%  { opacity:1; transform:translateY(0);  }
+  30%  { opacity:0; transform:translateY(-1em); }
+  31%  { opacity:0; transform:translateY(1em);  }
+  94%  { opacity:0; transform:translateY(1em);  }
+  100% { opacity:1; transform:translateY(0);  }
+}
+@keyframes dn8word2 {
+  0%   { opacity:0; transform:translateY(1em);  }
+  31%  { opacity:0; transform:translateY(1em);  }
+  38%  { opacity:1; transform:translateY(0);  }
+  57%  { opacity:1; transform:translateY(0);  }
+  63%  { opacity:0; transform:translateY(-1em); }
+  64%  { opacity:0; transform:translateY(1em);  }
+  100% { opacity:0; transform:translateY(1em);  }
+}
+@keyframes dn8word3 {
+  0%   { opacity:0; transform:translateY(1em);  }
+  64%  { opacity:0; transform:translateY(1em);  }
+  71%  { opacity:1; transform:translateY(0);  }
+  90%  { opacity:1; transform:translateY(0);  }
+  96%  { opacity:0; transform:translateY(-1em); }
+  97%  { opacity:0; transform:translateY(1em);  }
+  100% { opacity:0; transform:translateY(1em);  }
+}
+
+.dn8-hero-card {
+  animation: cardReveal 1.2s cubic-bezier(.16,1,.3,1) both;
+  animation-delay: .4s;
+}
+
+/* Scroll-reveal utility */
+@keyframes scrollReveal {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.scroll-reveal {
+  animation: scrollReveal .9s cubic-bezier(.16,1,.3,1) both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 55%;
+}
+
+.scroll-reveal-scale {
+  animation: scaleIn 1.1s cubic-bezier(.16,1,.3,1) both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 40%;
+}
+
+/* Hide scrollbar for featured collection */
+.hide-scrollbar { scrollbar-width: none; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Input focus styles */
+input:focus, textarea:focus {
+  border-color: rgba(196,164,74,.6) !important;
+  outline: none;
+}
+
+/* Why DN8 animated pillars */
+@keyframes pillarReveal {
+  from { opacity: 0; transform: translateY(34px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pillarLineSweep {
+  from { transform: scaleX(0); transform-origin: left; }
+  to { transform: scaleX(1); transform-origin: left; }
+}
+
+@keyframes pillarNumberSlide {
+  from { opacity: 0; transform: translateX(90px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.dn8-pillar-row {
+  animation: pillarReveal .9s cubic-bezier(.16,1,.3,1) both;
+  animation-delay: var(--pillar-delay);
+  animation-timeline: view();
+  animation-range: entry 0% entry 55%;
+}
+
+.dn8-pillar-line {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #c4a44a 18%, rgba(196,164,74,.35) 60%, transparent 100%);
+  transform: scaleX(0);
+  animation: pillarLineSweep 1.15s cubic-bezier(.16,1,.3,1) both;
+  animation-delay: var(--pillar-delay);
+  animation-timeline: view();
+  animation-range: entry 0% entry 45%;
+}
+
+.dn8-pillar-bg-number {
+  position: absolute;
+  right: clamp(-10px,2vw,30px);
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(120px,18vw,260px);
+  letter-spacing: 6px;
+  line-height: 1;
+  color: rgba(243,239,232,.035);
+  pointer-events: none;
+  animation: pillarNumberSlide 1s cubic-bezier(.16,1,.3,1) both;
+  animation-delay: var(--pillar-delay);
+  animation-timeline: view();
+  animation-range: entry 0% entry 55%;
+}
+
+.dn8-pillar-kicker,
+.dn8-pillar-title,
+.dn8-pillar-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.dn8-pillar-kicker {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(28px,4vw,54px);
+  letter-spacing: 2px;
+  color: #c4a44a;
+  opacity: .9;
+}
+
+.dn8-pillar-row:hover .dn8-pillar-title { color: #c4a44a !important; }
+.dn8-pillar-title { transition: color .35s ease; }
+
+@media (max-width: 760px) {
+  .dn8-pillar-bg-number { top: 22px; transform: none; }
+  .dn8-pillar-kicker { font-size: 28px; }
+}
+
+/* Fixed scroll-reactive DN8 pattern background */
+.dn8-fixed-pattern-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  background-image:
+    linear-gradient(90deg, rgba(6,6,20,.44), rgba(6,6,20,.14) 48%, rgba(6,6,20,.44)),
+    linear-gradient(0deg, rgba(6,6,20,.22), rgba(6,6,20,0) 35%, rgba(6,6,20,.22)),
+    url('/assets/dn8-fixed-pattern.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity .9s cubic-bezier(.25,.46,.45,.94);
+  will-change: opacity;
+}
